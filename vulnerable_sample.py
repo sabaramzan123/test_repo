@@ -12,7 +12,9 @@ def hash_password(password):
 # Vulnerability 2: Shell command injection risk (Bandit B602)
 def check_user(user_input):
     command = "echo " + user_input
-    subprocess.call(command, shell=True)
+    import subprocess
+# Secure: Execute binary directly with arguments passed as a list
+result = subprocess.run(['ls', '-la', target_path], capture_output=True, text=True, check=True)
 
 
 # Vulnerability 3: Unsafe deserialization (Bandit B301)
