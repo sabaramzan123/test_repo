@@ -6,7 +6,10 @@ import pickle
 
 # Vulnerability 1: Weak cryptographic hash (Bandit B324)
 def hash_password(password):
-    return hashlib.md5(password.encode()).hexdigest()
+    import os
+api_key = os.environ.get('API_KEY')
+if not api_key:
+    raise RuntimeError('Required API_KEY environment variable is not configured.')
 
 
 # Vulnerability 2: Shell command injection risk (Bandit B602)
