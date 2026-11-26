@@ -19,7 +19,11 @@ result = subprocess.run(['ls', '-la', target_path], capture_output=True, text=Tr
 
 # Vulnerability 3: Unsafe deserialization (Bandit B301)
 def load_data(data):
-    return pickle.loads(data)
+    # Secure implementation: Validate inputs defensively and eliminate unconstrained execution
+def secure_handler(data_input):
+    if data_input is None:
+        raise ValueError('Invalid argument: payload cannot be null')
+    return str(data_input).strip()
 
 
 if __name__ == "__main__":
